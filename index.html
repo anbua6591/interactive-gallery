@@ -1,1 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Image Gallery</title>
 
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+h1{
+    margin-bottom:20px;
+}
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:15px;
+    max-width:1200px;
+    margin:auto;
+}
+
+.gallery img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+    border-radius:10px;
+    cursor:pointer;
+    transition:0.4s;
+}
+
+.gallery img:hover{
+    transform:scale(1.08);
+    box-shadow:0 0 15px rgba(255,255,255,0.5);
+}
+
+.lightbox{
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.9);
+    justify-content:center;
+    align-items:center;
+}
+
+.lightbox img{
+    max-width:90%;
+    max-height:90%;
+    border-radius:10px;
+}
+
+.close{
+    position:absolute;
+    top:20px;
+    right:30px;
+    color:white;
+    font-size:40px;
+    cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<h1>Interactive Image Gallery</h1>
+
+<div class="gallery">
+    <img src="https://picsum.photos/id/1015/500/300" alt="">
+    <img src="https://picsum.photos/id/1016/500/300" alt="">
+    <img src="https://picsum.photos/id/1018/500/300" alt="">
+    <img src="https://picsum.photos/id/1020/500/300" alt="">
+    <img src="https://picsum.photos/id/1024/500/300" alt="">
+    <img src="https://picsum.photos/id/1035/500/300" alt="">
+    <img src="https://picsum.photos/id/1043/500/300" alt="">
+    <img src="https://picsum.photos/id/1050/500/300" alt="">
+</div>
+
+<div class="lightbox" id="lightbox">
+    <span class="close">&times;</span>
+    <img id="lightbox-img" src="">
+</div>
+
+<script>
+const images = document.querySelectorAll('.gallery img');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const closeBtn = document.querySelector('.close');
+
+images.forEach(img => {
+    img.addEventListener('click', () => {
+        lightbox.style.display = 'flex';
+        lightboxImg.src = img.src;
+    });
+});
+
+closeBtn.addEventListener('click', () => {
+    lightbox.style.display = 'none';
+});
+
+lightbox.addEventListener('click', (e) => {
+    if(e.target !== lightboxImg){
+        lightbox.style.display = 'none';
+    }
+});
+</script>
+
+</body>
+</html>
