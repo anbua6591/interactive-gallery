@@ -1,1 +1,1 @@
-# interactive-gall
+# interactive-gallery 
